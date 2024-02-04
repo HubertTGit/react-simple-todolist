@@ -28,7 +28,7 @@ function App() {
     }
   }, [filter, todos]);
 
-  setLS(filteredTodos);
+  setLS(todos);
 
   return (
     <div className=" flex justify-center items-center flex-col h-full">

@@ -15,7 +15,7 @@ export default function TodoInput({ onEnter }: TodoProps) {
       className="border border-gray-600 p-3 rounded-lg w-full"
       type="text"
       value={todo}
-      placeholder="press enter to add task"
+      placeholder="type then press enter.."
       onChange={(e) => setTodo(e.target.value)}
       onKeyUp={(e) => {
         if (e.key === 'Enter') {
