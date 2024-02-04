@@ -45,7 +45,7 @@ export default function TodoItem({ task, onUpdate }: TodoItemProps) {
       >
         {edit ? (
           <input
-            className="flex-auto"
+            className="flex-auto text-slate-600 outline-none"
             ref={ref}
             value={text}
             onBlur={() => {
