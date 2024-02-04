@@ -1,6 +1,6 @@
-# React Simple Todolist
+# Simple Todolist
 
-This is a very simple "Todo list" made in react.
+This is a very simple "Todo list" made in `react`.
 
 Demo: [---coming---](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md)
 
