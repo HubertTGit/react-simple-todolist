@@ -11,14 +11,14 @@ export default function TodoFilter({
   filter,
   todos,
 }: filterProps<filterType>) {
-  const allCss = `p-2 border rounded-md border-red-950 ${
+  const allCss = `px-2 border rounded-md border-red-950 text-sm ${
     filter === 'all' && 'bg-red-950 text-white'
   }`;
-  const completedCss = `p-2 border rounded-md border-red-950 ${
+  const completedCss = `px-2 border rounded-md border-red-950 text-sm ${
     filter === 'completed' && 'bg-red-950 text-white'
   }`;
 
-  const openCss = `p-2 border rounded-md border-red-950 ${
+  const openCss = `px-2 border rounded-md border-red-950 text-sm ${
     filter === 'open' && 'bg-red-950 text-white'
   }`;
 
@@ -27,7 +27,7 @@ export default function TodoFilter({
   const open = todos?.filter((o) => !o.isCompleted).length;
 
   return (
-    <div className="w-full">
+    <div className="w-full py">
       <div className=" flex gap-2">
         <button className={allCss} onClick={() => onChange('all')}>
           all ({all})

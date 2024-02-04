@@ -33,10 +33,15 @@ function App() {
   return (
     <div className=" flex justify-center items-center flex-col h-full">
       <div className="w-[300px]">
-        <TodoHeader onDelete={dispatchTodo} title="Todo list" />
+        <div className="py-2">
+          <TodoHeader onDelete={dispatchTodo} title="Todo list" />
+        </div>
+
         <TodoFilter onChange={setFilter} filter={filter} todos={todos} />
 
-        <TodoInput onEnter={dispatchTodo} />
+        <div className="py-2">
+          <TodoInput onEnter={dispatchTodo} />
+        </div>
 
         <TodoList todos={filteredTodos} onUpdate={dispatchTodo} />
       </div>

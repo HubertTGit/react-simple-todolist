@@ -9,7 +9,12 @@ export default function TodoHeader({ onDelete, title }: TodoHeaderProps) {
   return (
     <div className="flex justify-between items-center w-full">
       <h1>{title}</h1>
-      <button onClick={() => onDelete({ type: 'clear', id: '' })}>clear</button>
+      <button
+        className="text-sm text-red-600 hover:underline"
+        onClick={() => onDelete({ type: 'clear', id: '' })}
+      >
+        clear
+      </button>
     </div>
   );
 }
