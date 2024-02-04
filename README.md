@@ -2,7 +2,7 @@
 
 This is a very simple "Todo list" made in `react`.
 
-Demo: [---coming---](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md)
+Demo: [click here](https://react-simple-todolist-one.vercel.app/)
 
 ## Features
 
