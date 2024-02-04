@@ -5,10 +5,12 @@ export interface Itodo {
 }
 
 export interface IReducerPayload {
-  type: 'add' | 'remove' | 'update' | 'toggle';
+  type: ITodoActionType;
   task?: string;
   id: string;
 }
+
+export type ITodoActionType = 'add' | 'remove' | 'update' | 'toggle' | 'clear';
 
 export type filterType = 'completed' | 'all' | 'open';
 
@@ -28,6 +30,7 @@ export default function reducer(
       }
 
       draft.unshift(data);
+
       return draft;
     }
     case 'remove': {
@@ -38,6 +41,12 @@ export default function reducer(
       if (_draft) {
         _draft.isCompleted = !_draft.isCompleted;
       }
+
+      return draft;
+    }
+    case 'clear': {
+      draft = [];
+
       return draft;
     }
     case 'update': {

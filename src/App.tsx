@@ -5,8 +5,10 @@ import reducer, { Itodo, filterType } from './utils/todoReducer';
 import TodoInput from './components/todoInput';
 import TodoList from './components/todoList';
 import TodoFilter from './components/todoFilter';
+import TodoHeader from './components/todoHeader';
+import { getLS, setLS } from './utils/localStorage';
 
-const initialTodos: Itodo[] = [];
+const initialTodos: Itodo[] = getLS();
 
 function App() {
   const [filter, setFilter] = useState<filterType>('all');
@@ -26,13 +28,18 @@ function App() {
     }
   }, [filter, todos]);
 
+  setLS(filteredTodos);
+
   return (
     <div className=" flex justify-center items-center flex-col h-full">
-      <TodoFilter onChange={setFilter} filter={filter} todos={todos} />
+      <div className="w-[300px]">
+        <TodoHeader onDelete={dispatchTodo} title="Todo list" />
+        <TodoFilter onChange={setFilter} filter={filter} todos={todos} />
 
-      <TodoInput onEnter={dispatchTodo} />
+        <TodoInput onEnter={dispatchTodo} />
 
-      <TodoList todos={filteredTodos} onUpdate={dispatchTodo} />
+        <TodoList todos={filteredTodos} onUpdate={dispatchTodo} />
+      </div>
     </div>
   );
 }

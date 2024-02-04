@@ -8,7 +8,7 @@ type TodoListProps<T> = {
 
 export default function TodoList({ todos, onUpdate }: TodoListProps<Itodo>) {
   return (
-    <div className="h-[600px] overflow-auto w-[300px]">
+    <div className="h-[600px] overflow-auto w-full">
       <div>
         {todos.map((t) => (
           <TodoItem key={t.id} task={t} onUpdate={onUpdate} />

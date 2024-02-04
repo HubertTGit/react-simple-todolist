@@ -27,8 +27,7 @@ export default function TodoFilter({
   const open = todos?.filter((o) => !o.isCompleted).length;
 
   return (
-    <>
-      <h1>Todos ({all})</h1>
+    <div className="w-full">
       <div className=" flex gap-2">
         <button className={allCss} onClick={() => onChange('all')}>
           all ({all})
@@ -40,6 +39,6 @@ export default function TodoFilter({
           completed ({completed})
         </button>
       </div>
-    </>
+    </div>
   );
 }
