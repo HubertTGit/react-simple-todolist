@@ -8,11 +8,11 @@ type TodoListProps<T> = {
 
 export default function TodoList({ todos, onUpdate }: TodoListProps<Itodo>) {
   return (
-    <div className="h-[600px] overflow-x-hidden w-full">
+    <div className="h-[400px] overflow-x-hidden w-full">
       {todos.map((t) => (
         <TodoItem key={t.id} task={t} onUpdate={onUpdate} />
       ))}
-      {todos.length === 0 && <p>Empty Tasks!</p>}
+      {todos.length === 0 && <p className=" text-center mt-5">No Items!</p>}
     </div>
   );
 }

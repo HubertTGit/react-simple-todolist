@@ -31,8 +31,8 @@ function App() {
   setLS(todos);
 
   return (
-    <div className=" flex justify-center items-center flex-col h-full">
-      <div className="w-[300px]">
+    <div className=" flex justify-center items-center flex-col h-full bg-slate-400">
+      <div className="w-[300px] rounded-md bg-white p-2">
         <div className="py-2">
           <TodoHeader onDelete={dispatchTodo} title="Todo list" />
         </div>

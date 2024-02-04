@@ -33,7 +33,9 @@ export default function TodoItem({ task, onUpdate }: TodoItemProps) {
       <animated.div
         {...bind()}
         style={{ x, touchAction: 'none' }}
-        className="border border-b-orange-500 p-2 flex gap-2 bg-white"
+        className={`p-2 flex gap-2 text-white border border-t-0 border-b-white ${
+          task.isCompleted ? 'bg-slate-500 line-through ' : 'bg-emerald-500 '
+        }`}
         onDoubleClick={() => {
           setEdit(true);
           setTimeout(() => {
@@ -43,7 +45,7 @@ export default function TodoItem({ task, onUpdate }: TodoItemProps) {
       >
         {edit ? (
           <input
-            className=" flex-auto"
+            className="flex-auto"
             ref={ref}
             value={text}
             onBlur={() => {
@@ -61,9 +63,7 @@ export default function TodoItem({ task, onUpdate }: TodoItemProps) {
         ) : (
           <div
             style={{ userSelect: 'none' }}
-            className={`flex-auto text-green-700 ${
-              task.isCompleted && 'line-through text-slate-400'
-            }`}
+            className={`flex-auto ${task.isCompleted && 'line-through'}`}
           >
             {task.task}
           </div>
