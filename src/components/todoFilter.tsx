@@ -29,14 +29,26 @@ export default function TodoFilter({
   return (
     <div className="w-full py">
       <div className=" flex gap-2">
-        <button className={allCss} onClick={() => onChange('all')}>
-          all ({all})
+        <button
+          data-testid="button-all"
+          className={allCss}
+          onClick={() => onChange('all')}
+        >
+          all <span>({all})</span>
         </button>
-        <button className={openCss} onClick={() => onChange('open')}>
-          open ({open})
+        <button
+          data-testid="button-open"
+          className={openCss}
+          onClick={() => onChange('open')}
+        >
+          open <span>({open})</span>
         </button>
-        <button className={completedCss} onClick={() => onChange('completed')}>
-          completed ({completed})
+        <button
+          data-testid="button-completed"
+          className={completedCss}
+          onClick={() => onChange('completed')}
+        >
+          completed <span>({completed})</span>
         </button>
       </div>
     </div>
