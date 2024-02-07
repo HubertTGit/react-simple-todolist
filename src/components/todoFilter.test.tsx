@@ -1,11 +1,9 @@
 import { render, screen } from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
 import '@testing-library/jest-dom';
 import TodoFilter from './todoFilter';
-import App from './../App';
 import { Itodo } from '../utils/todoReducer';
 
-test('click all button', async () => {
+test('check if all button is selected', async () => {
   const onChange = () => {};
   const todos: Itodo[] = [];
   const filter = 'all';
@@ -15,29 +13,32 @@ test('click all button', async () => {
   // ACT
   const buttonAll = screen.getByTestId('button-all');
   const activeCss = 'bg-red-950';
-  await userEvent.click(buttonAll);
 
   // ASSERT
   expect(buttonAll).toHaveClass(activeCss);
 });
 
-test('click all button', async () => {
+test('set todos and check buttons visibility', async () => {
   const onChange = () => {};
   const todos: Itodo[] = [
     { task: 'hello', isCompleted: true, id: '123' },
-    { task: 'hello', isCompleted: true, id: '333' },
+    { task: 'hello', isCompleted: false, id: '333' },
   ];
   const filter = 'completed';
   // ARRANGE
   render(<TodoFilter todos={todos} filter={filter} onChange={onChange} />);
 
   // ACT
-  const buttonCmpt = screen.getByTestId('button-completed');
+  const buttonAll = screen.getAllByRole('button')[0];
+  const buttonCmpt = screen.getAllByRole('button')[2];
+  const buttonOpen = screen.getAllByRole('button')[1];
+
   const activeCss = 'bg-red-950';
-  await userEvent.click(buttonCmpt);
 
   // ASSERT
   expect(buttonCmpt).toHaveClass(activeCss);
   expect(buttonCmpt).toHaveTextContent('completed');
-  expect(buttonCmpt.querySelector('span')).toHaveTextContent('(2)');
+  expect(buttonAll).toHaveTextContent('(2)');
+  expect(buttonCmpt).toHaveTextContent('(1)');
+  expect(buttonOpen).toHaveTextContent('(1)');
 });

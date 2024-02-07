@@ -31,6 +31,7 @@ export default function TodoItem({ task, onUpdate }: TodoItemProps) {
   return (
     <div className=" bg-red-400">
       <animated.div
+        data-testid="todo-item"
         {...bind()}
         style={{ x, touchAction: 'none' }}
         className={`p-2 flex gap-2 text-white border border-t-0 border-b-white ${
@@ -45,6 +46,7 @@ export default function TodoItem({ task, onUpdate }: TodoItemProps) {
       >
         {edit ? (
           <input
+            data-testid="todo-item-input"
             className="flex-auto text-slate-600 outline-none"
             ref={ref}
             value={text}
@@ -62,6 +64,7 @@ export default function TodoItem({ task, onUpdate }: TodoItemProps) {
           />
         ) : (
           <div
+            data-testid="todo-item-text"
             style={{ userSelect: 'none' }}
             className={`flex-auto ${task.isCompleted && 'line-through'}`}
           >
@@ -70,6 +73,7 @@ export default function TodoItem({ task, onUpdate }: TodoItemProps) {
         )}
         <div>
           <button
+            data-testid="todo-item-toggle"
             onClick={() => {
               onUpdate({
                 type: 'toggle',

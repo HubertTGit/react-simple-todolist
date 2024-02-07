@@ -34,21 +34,21 @@ export default function TodoFilter({
           className={allCss}
           onClick={() => onChange('all')}
         >
-          all <span>({all})</span>
+          all ({all})
         </button>
         <button
           data-testid="button-open"
           className={openCss}
           onClick={() => onChange('open')}
         >
-          open <span>({open})</span>
+          open ({open})
         </button>
         <button
           data-testid="button-completed"
           className={completedCss}
           onClick={() => onChange('completed')}
         >
-          completed <span>({completed})</span>
+          completed ({completed})
         </button>
       </div>
     </div>
