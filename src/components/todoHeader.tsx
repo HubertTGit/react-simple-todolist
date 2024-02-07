@@ -7,7 +7,10 @@ type TodoHeaderProps = {
 };
 export default function TodoHeader({ onDelete, title }: TodoHeaderProps) {
   return (
-    <div className="flex justify-between items-center w-full">
+    <div
+      className="flex justify-between items-center w-full"
+      data-testid="todo-heading"
+    >
       <h1>{title}</h1>
       <button
         className="text-sm text-red-600 hover:underline"

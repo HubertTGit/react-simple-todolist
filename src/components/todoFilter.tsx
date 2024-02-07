@@ -27,7 +27,7 @@ export default function TodoFilter({
   const open = todos?.filter((o) => !o.isCompleted).length;
 
   return (
-    <div className="w-full py">
+    <div className="w-full py" data-testid="todo-filter">
       <div className=" flex gap-2">
         <button
           data-testid="button-all"

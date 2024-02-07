@@ -12,6 +12,7 @@ export default function TodoInput({ onEnter }: TodoProps) {
 
   return (
     <input
+      data-testid="todo-input"
       className="border border-gray-600 p-3 rounded-lg w-full"
       type="text"
       value={todo}
