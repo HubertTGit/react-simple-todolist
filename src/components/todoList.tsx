@@ -1,22 +1,22 @@
-import { IReducerPayload, Itodo } from '../utils/todoReducer';
-import TodoItem from './todoItem';
+import { TodoReducerAction, Todoitem } from '../types/todo.model';
+import { TodoItem } from './todoItem';
 
 type TodoListProps<T> = {
   todos: T[];
-  onUpdate: (payload: IReducerPayload) => void;
+  onUpdate: (payload: TodoReducerAction) => void;
 };
 
-export default function TodoList({ todos, onUpdate }: TodoListProps<Itodo>) {
+export const TodoList = ({ todos, onUpdate }: TodoListProps<Todoitem>) => {
   return (
-    <div className="h-[400px] overflow-x-hidden w-full" data-testid="todo-list">
+    <ul className="h-[400px] overflow-x-hidden w-full" data-testid="todo-list">
       {todos.map((t) => (
         <TodoItem key={t.id} task={t} onUpdate={onUpdate} />
       ))}
       {todos.length === 0 && (
-        <p className=" text-center mt-5" data-testid="noitems">
+        <li className=" text-center mt-5" data-testid="noitems">
           No Items!
-        </p>
+        </li>
       )}
-    </div>
+    </ul>
   );
-}
+};

@@ -1,10 +1,10 @@
-import { Itodo } from './todoReducer';
+import { Todoitem } from '../types/todo.model';
 
-export const setLS = (data: Itodo[]) => {
+export const setLocalStorage = (data: Todoitem[]) => {
   localStorage.setItem('todos', JSON.stringify(data));
 };
 
-export const getLS = (): Itodo[] => {
+export const getLocalStorage = (): Todoitem[] => {
   const todos = localStorage.getItem('todos');
 
   return JSON.parse(todos || '[]');

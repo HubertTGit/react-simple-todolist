@@ -1,16 +1,16 @@
-import { Itodo, filterType } from '../utils/todoReducer';
+import { Todoitem, TodoFilterType } from '../types/todo.model';
 
 type filterProps<T> = {
   onChange: (d: T) => void;
   filter: T;
-  todos: Itodo[];
+  todos: Todoitem[];
 };
 
-export default function TodoFilter({
+export const TodoFilter = ({
   onChange,
   filter,
   todos,
-}: filterProps<filterType>) {
+}: filterProps<TodoFilterType>) => {
   const allCss = `px-2 border rounded-md border-red-950 text-sm ${
     filter === 'all' && 'bg-red-950 text-white'
   }`;
@@ -53,4 +53,4 @@ export default function TodoFilter({
       </div>
     </div>
   );
-}
+};

@@ -1,14 +1,14 @@
 import { Dispatch } from 'react';
-import { IReducerPayload } from '../utils/todoReducer';
+import { TodoReducerAction } from '../types/todo.model';
 
 type TodoHeaderProps = {
-  onDelete: Dispatch<IReducerPayload>;
+  onDelete: Dispatch<TodoReducerAction>;
   title: string;
 };
-export default function TodoHeader({ onDelete, title }: TodoHeaderProps) {
+export const TodoHeader = ({ onDelete, title }: TodoHeaderProps) => {
   return (
     <div
-      className="flex justify-between items-center w-full"
+      className="flex justify-between items-center w-full py-2"
       data-testid="todo-heading"
     >
       <h1>{title}</h1>
@@ -16,8 +16,8 @@ export default function TodoHeader({ onDelete, title }: TodoHeaderProps) {
         className="text-sm text-red-600 hover:underline"
         onClick={() => onDelete({ type: 'clear', id: '' })}
       >
-        clear
+        clear completed
       </button>
     </div>
   );
-}
+};

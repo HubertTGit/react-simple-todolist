@@ -1,24 +1,10 @@
-export interface Itodo {
-  id: string;
-  task: string;
-  isCompleted?: boolean;
-}
-
-export interface IReducerPayload {
-  type: ITodoActionType;
-  task?: string;
-  id: string;
-}
-
-export type ITodoActionType = 'add' | 'remove' | 'update' | 'toggle' | 'clear';
-
-export type filterType = 'completed' | 'all' | 'open';
+import { Todoitem, TodoReducerAction } from '../types/todo.model';
 
 export default function reducer(
-  draft: Itodo[],
-  action: IReducerPayload
-): Itodo[] {
-  const data: Itodo = {
+  draft: Todoitem[],
+  action: TodoReducerAction
+): Todoitem[] {
+  const data: Todoitem = {
     task: action.task || '',
     id: action.id,
   };
@@ -29,36 +15,27 @@ export default function reducer(
         return draft;
       }
 
-      draft.unshift(data);
-
-      return draft;
-    }
-    case 'remove': {
-      return draft.filter((g) => g.id !== data.id);
+      return [data, ...draft];
     }
     case 'toggle': {
-      const _draft = draft.find((g) => g.id === data.id);
-      if (_draft) {
-        _draft.isCompleted = !_draft.isCompleted;
-      }
-
-      return draft;
+      return draft.map((g) => {
+        if (g.id === data.id) {
+          g.isCompleted = !g.isCompleted;
+          return g;
+        }
+        return g;
+      });
     }
     case 'clear': {
-      draft = [];
-
-      return draft;
+      return draft.filter((g) => !g.isCompleted);
     }
     case 'update': {
-      const _draft = draft.find((g) => g.id === data.id);
-
-      if (_draft) {
-        if (data.task) {
-          _draft.task = data.task;
+      return draft.map((g) => {
+        if (g.id === data.id) {
+          g.task = data.task || '';
         }
-      }
-
-      return draft;
+        return g;
+      });
     }
     default: {
       throw Error('unknown action');
