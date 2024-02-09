@@ -1,12 +1,13 @@
-import { Dispatch, SetStateAction, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import { TodoItem } from '../types/todo.model';
 
 type TodoItemProps = {
   task: TodoItem;
-  onUpdate: Dispatch<SetStateAction<TodoItem[]>>;
+  onUpdate: (t: string, id: string) => void;
+  onToggle: (id: string) => void;
 };
 
-export const TodoItemWidget = ({ task, onUpdate }: TodoItemProps) => {
+export const TodoItemWidget = ({ task, onUpdate, onToggle }: TodoItemProps) => {
   const [edit, setEdit] = useState<boolean>(false);
   const [text, setText] = useState<string>(task.task);
   const ref = useRef<HTMLInputElement>(null);
@@ -18,15 +19,7 @@ export const TodoItemWidget = ({ task, onUpdate }: TodoItemProps) => {
         task.isCompleted ? 'bg-slate-500 line-through ' : 'bg-emerald-500 '
       }`}
       onClick={() => {
-        onUpdate((prev) => {
-          return prev.map((o) => {
-            if (o.id === task.id) {
-              o.isCompleted = !o.isCompleted;
-            }
-
-            return o;
-          });
-        });
+        onToggle(task.id);
       }}
       onDoubleClick={() => {
         setTimeout(() => {
@@ -52,14 +45,7 @@ export const TodoItemWidget = ({ task, onUpdate }: TodoItemProps) => {
           onKeyUp={(e) => {
             if (e.key === 'Enter') {
               setEdit(false);
-              onUpdate((prev) => {
-                return prev.map((o) => {
-                  if (o.id === task.id) {
-                    o.task = text;
-                  }
-                  return o;
-                });
-              });
+              onUpdate(text, task.id);
             }
           }}
         />

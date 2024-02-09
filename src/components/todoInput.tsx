@@ -1,14 +1,11 @@
-import { Dispatch, SetStateAction, useState } from 'react';
-import { TodoItem } from '../types/todo.model';
+import { useState } from 'react';
 
 type TodoProps = {
-  onEnter: Dispatch<SetStateAction<TodoItem[]>>;
+  onEnter: (t: string) => void;
 };
 
 export const TodoInput = ({ onEnter }: TodoProps) => {
   const [todo, setTodo] = useState<string>('');
-
-  const _id = (Math.random() * 1000_000).toString();
 
   return (
     <div className="py-2">
@@ -21,10 +18,7 @@ export const TodoInput = ({ onEnter }: TodoProps) => {
         onChange={(e) => setTodo(e.target.value)}
         onKeyUp={(e) => {
           if (e.key === 'Enter') {
-            onEnter((prev: TodoItem[]) => [
-              { id: _id, task: todo, isCompleted: false },
-              ...prev,
-            ]);
+            onEnter(todo);
             setTodo('');
           }
         }}

@@ -15,19 +15,48 @@ function App() {
   const [todos, setTodo] = useState(initialTodos);
 
   useEffect(() => {
-    console.log('todos', todos);
     setLocalStorage(todos);
   }, [todos]);
 
   const filteredTodos = filterHelper(filter, todos);
 
+  function onDeleteHandler() {
+    setTodo(todos.filter((o) => !o.isCompleted));
+  }
+
+  function onChangeHandler(filter: TodoFilterType) {
+    setFilter(filter);
+  }
+
+  function onEnterHandler(task: string) {
+    const _id = (Math.random() * 1000_000).toString();
+    const newTodo: TodoItem = { task, id: _id, isCompleted: false };
+    setTodo([newTodo, ...todos]);
+  }
+
+  function onUpdate(task: string, id: string) {
+    setTodo(todos.map((o) => (o.id === id ? { ...o, task } : o)));
+  }
+
+  function onToggle(id: string) {
+    setTodo(
+      todos.map((o) =>
+        o.id === id ? { ...o, isCompleted: !o.isCompleted } : o
+      )
+    );
+  }
+
   return (
     <div className=" flex justify-center items-center flex-col h-full bg-slate-400">
       <div className="w-[300px] rounded-md bg-white p-2">
-        <TodoHeader onDelete={setTodo} title="Todo list" />
-        <TodoFilter onChange={setFilter} filter={filter} todos={todos} />
-        <TodoInput onEnter={setTodo} />
-        <TodoList todos={filteredTodos} onUpdate={setTodo} />
+        <TodoHeader onDelete={onDeleteHandler} title="Todo list" />
+        <TodoFilter onChange={onChangeHandler} filter={filter} todos={todos} />
+        <TodoInput onEnter={onEnterHandler} />
+        <TodoList
+          todos={filteredTodos}
+          onUpdate={onUpdate}
+          onToggle={onToggle}
+        />
       </div>
     </div>
   );
