@@ -1,10 +1,10 @@
-import { Todoitem, TodoReducerAction } from '../types/todo.model';
+import { TodoItem, TodoReducerAction } from '../types/todo.model';
 
 export default function reducer(
-  draft: Todoitem[],
+  draft: TodoItem[],
   action: TodoReducerAction
-): Todoitem[] {
-  const data: Todoitem = {
+): TodoItem[] {
+  const data: TodoItem = {
     task: action.task || '',
     id: action.id,
   };

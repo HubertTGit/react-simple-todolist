@@ -1,8 +1,8 @@
-import { useState } from 'react';
-import { TodoReducerAction } from '../types/todo.model';
+import { Dispatch, SetStateAction, useState } from 'react';
+import { TodoItem } from '../types/todo.model';
 
 type TodoProps = {
-  onEnter: (payload: TodoReducerAction) => void;
+  onEnter: Dispatch<SetStateAction<TodoItem[]>>;
 };
 
 export const TodoInput = ({ onEnter }: TodoProps) => {
@@ -21,7 +21,10 @@ export const TodoInput = ({ onEnter }: TodoProps) => {
         onChange={(e) => setTodo(e.target.value)}
         onKeyUp={(e) => {
           if (e.key === 'Enter') {
-            onEnter({ task: todo, id: _id, type: 'add' });
+            onEnter((prev: TodoItem[]) => [
+              { id: _id, task: todo, isCompleted: false },
+              ...prev,
+            ]);
             setTodo('');
           }
         }}

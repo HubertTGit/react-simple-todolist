@@ -1,4 +1,4 @@
-export interface Todoitem {
+export interface TodoItem {
   id: string;
   task: string;
   isCompleted?: boolean;

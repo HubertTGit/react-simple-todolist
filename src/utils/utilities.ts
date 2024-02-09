@@ -1,9 +1,9 @@
-import { Todoitem, TodoFilterType } from '../types/todo.model';
+import { TodoItem, TodoFilterType } from '../types/todo.model';
 
 export function filterHelper(
   filter: TodoFilterType,
-  todos: Todoitem[]
-): Todoitem[] {
+  todos: TodoItem[]
+): TodoItem[] {
   switch (filter) {
     case 'completed': {
       return todos.filter((d) => d.isCompleted);

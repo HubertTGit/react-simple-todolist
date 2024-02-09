@@ -1,9 +1,9 @@
-import { Todoitem, TodoFilterType } from '../types/todo.model';
+import { TodoItem, TodoFilterType } from '../types/todo.model';
 
 type filterProps<T> = {
   onChange: (d: T) => void;
   filter: T;
-  todos: Todoitem[];
+  todos: TodoItem[];
 };
 
 export const TodoFilter = ({

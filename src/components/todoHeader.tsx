@@ -1,8 +1,8 @@
-import { Dispatch } from 'react';
-import { TodoReducerAction } from '../types/todo.model';
+import { Dispatch, SetStateAction } from 'react';
+import { TodoItem } from '../types/todo.model';
 
 type TodoHeaderProps = {
-  onDelete: Dispatch<TodoReducerAction>;
+  onDelete: Dispatch<SetStateAction<TodoItem[]>>;
   title: string;
 };
 export const TodoHeader = ({ onDelete, title }: TodoHeaderProps) => {
@@ -14,7 +14,9 @@ export const TodoHeader = ({ onDelete, title }: TodoHeaderProps) => {
       <h1>{title}</h1>
       <button
         className="text-sm text-red-600 hover:underline"
-        onClick={() => onDelete({ type: 'clear', id: '' })}
+        onClick={() =>
+          onDelete((prev: TodoItem[]) => prev.filter((o) => !o.isCompleted))
+        }
       >
         clear completed
       </button>

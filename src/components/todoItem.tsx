@@ -1,12 +1,12 @@
-import { useRef, useState } from 'react';
-import { Todoitem, TodoReducerAction } from '../types/todo.model';
+import { Dispatch, SetStateAction, useRef, useState } from 'react';
+import { TodoItem } from '../types/todo.model';
 
 type TodoItemProps = {
-  task: Todoitem;
-  onUpdate: (payload: TodoReducerAction) => void;
+  task: TodoItem;
+  onUpdate: Dispatch<SetStateAction<TodoItem[]>>;
 };
 
-export const TodoItem = ({ task, onUpdate }: TodoItemProps) => {
+export const TodoItemWidget = ({ task, onUpdate }: TodoItemProps) => {
   const [edit, setEdit] = useState<boolean>(false);
   const [text, setText] = useState<string>(task.task);
   const ref = useRef<HTMLInputElement>(null);
@@ -18,9 +18,14 @@ export const TodoItem = ({ task, onUpdate }: TodoItemProps) => {
         task.isCompleted ? 'bg-slate-500 line-through ' : 'bg-emerald-500 '
       }`}
       onClick={() => {
-        onUpdate({
-          type: 'toggle',
-          id: task.id,
+        onUpdate((prev) => {
+          return prev.map((o) => {
+            if (o.id === task.id) {
+              o.isCompleted = !o.isCompleted;
+            }
+
+            return o;
+          });
         });
       }}
       onDoubleClick={() => {
@@ -47,7 +52,14 @@ export const TodoItem = ({ task, onUpdate }: TodoItemProps) => {
           onKeyUp={(e) => {
             if (e.key === 'Enter') {
               setEdit(false);
-              onUpdate({ type: 'update', task: text, id: task.id });
+              onUpdate((prev) => {
+                return prev.map((o) => {
+                  if (o.id === task.id) {
+                    o.task = text;
+                  }
+                  return o;
+                });
+              });
             }
           }}
         />
