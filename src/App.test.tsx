@@ -44,11 +44,11 @@ test('Add an Item then set to complete', () => {
   expect(items.length).toBe(1);
 
   // Delete the item
-  fireEvent.click(items[0].querySelector('button')!);
+  fireEvent.click(items[0]);
 
   expect(items[0]).toHaveClass('line-through');
 
-  fireEvent.click(items[0].querySelector('button')!);
+  fireEvent.click(items[0]);
 
   expect(items[0]).not.toHaveClass('line-through');
 });

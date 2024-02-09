@@ -1,8 +1,8 @@
 //write simple test
 import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
-import TodoHeader from './todoHeader';
 import { vi } from 'vitest';
+import { TodoHeader } from './todoHeader';
 test('renders TodoHeader component', async () => {
   const onDeleteMock = vi.fn();
   const title = 'Test Title';

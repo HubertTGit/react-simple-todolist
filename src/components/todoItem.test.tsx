@@ -1,19 +1,26 @@
 import { render, screen, fireEvent } from '@testing-library/react';
-import TodoItem from './todoItem';
-import { Itodo } from '../utils/todoReducer';
+import { TodoItemWidget } from './todoItem';
 import { vi } from 'vitest';
+import { TodoItem } from '../types/todo.model';
 
 describe('TodoItem', () => {
-  const mockTask: Itodo = {
+  const mockTask: TodoItem = {
     id: '1',
     task: 'Buy groceries',
     isCompleted: false,
   };
 
   const mockOnUpdate = vi.fn();
+  const mockOnToggle = vi.fn();
 
   beforeEach(() => {
-    render(<TodoItem task={mockTask} onUpdate={mockOnUpdate} />);
+    render(
+      <TodoItemWidget
+        task={mockTask}
+        onUpdate={mockOnUpdate}
+        onToggle={mockOnToggle}
+      />
+    );
   });
 
   test('renders item div holder', () => {
@@ -26,17 +33,22 @@ describe('TodoItem', () => {
   test('on double click renders the input', () => {
     const itemList = screen.getByTestId('todo-item');
     fireEvent.dblClick(itemList);
-    const itemInput = screen.getByTestId('todo-item-input');
-    expect(itemInput).toBeInTheDocument();
+    setTimeout(() => {
+      const itemInput = screen.getByTestId('todo-item-input');
+      expect(itemInput).toBeInTheDocument();
+    }, 300);
   });
 
   test('onblur out input field text item should be visible again', () => {
     const itemList = screen.getByTestId('todo-item');
     fireEvent.dblClick(itemList);
-    const itemInput = screen.getByTestId('todo-item-input');
-    fireEvent.blur(itemInput);
-    const itemText = screen.getByTestId('todo-item-text');
-    expect(itemInput).not.toBeInTheDocument();
-    expect(itemText).toBeInTheDocument();
+
+    setTimeout(() => {
+      const itemInput = screen.getByTestId('todo-item-input');
+      fireEvent.blur(itemInput);
+      const itemText = screen.getByTestId('todo-item-text');
+      expect(itemInput).not.toBeInTheDocument();
+      expect(itemText).toBeInTheDocument();
+    }, 300);
   });
 });

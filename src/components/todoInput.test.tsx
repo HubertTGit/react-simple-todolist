@@ -1,7 +1,7 @@
 import { render, screen, fireEvent } from '@testing-library/react';
-import TodoInput from './todoInput';
 import '@testing-library/jest-dom';
 import { vi } from 'vitest';
+import { TodoInput } from './todoInput';
 
 describe('TodoInput', () => {
   test('should call onEnter callback with correct payload when Enter key is pressed', () => {

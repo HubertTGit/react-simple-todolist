@@ -1,5 +1,4 @@
-import { useState, useEffect } from 'react';
-
+import { useState, useEffect, useCallback } from 'react';
 import { TodoInput } from './components/todoInput';
 import { TodoList } from './components/todoList';
 import { TodoFilter } from './components/todoFilter';
@@ -20,32 +19,40 @@ function App() {
 
   const filteredTodos = filterHelper(filter, todos);
 
-  function onDeleteHandler() {
-    setTodo(todos.filter((o) => !o.isCompleted));
-  }
+  const onDeleteHandler = useCallback(() => {
+    setTodo(todos.filter((todo) => !todo.isCompleted));
+  }, [todos]);
 
-  function onChangeHandler(filter: TodoFilterType) {
+  const onChangeHandler = useCallback((filter: TodoFilterType) => {
     setFilter(filter);
-  }
+  }, []);
 
-  function onEnterHandler(task: string) {
-    const _id = (Math.random() * 1000_000).toString();
-    const newTodo: TodoItem = { task, id: _id, isCompleted: false };
-    setTodo([newTodo, ...todos]);
-  }
+  const onEnterHandler = useCallback(
+    (task: string) => {
+      const _id = (Math.random() * 1000_000).toString();
+      const newTodo: TodoItem = { task, id: _id, isCompleted: false };
+      setTodo([newTodo, ...todos]);
+    },
+    [todos]
+  );
 
-  function onUpdate(task: string, id: string) {
-    setTodo(todos.map((o) => (o.id === id ? { ...o, task } : o)));
-  }
+  const onUpdate = useCallback(
+    (task: string, id: string) => {
+      setTodo(todos.map((todo) => (todo.id === id ? { ...todo, task } : todo)));
+    },
+    [todos]
+  );
 
-  function onToggle(id: string) {
-    setTodo(
-      todos.map((o) =>
-        o.id === id ? { ...o, isCompleted: !o.isCompleted } : o
-      )
-    );
-  }
-
+  const onToggle = useCallback(
+    (id: string) => {
+      setTodo(
+        todos.map((todo) =>
+          todo.id === id ? { ...todo, isCompleted: !todo.isCompleted } : todo
+        )
+      );
+    },
+    [todos]
+  );
   return (
     <div className=" flex justify-center items-center flex-col h-full bg-slate-400">
       <div className="w-[300px] rounded-md bg-white p-2">
