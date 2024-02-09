@@ -6,7 +6,7 @@ Demo: [click here](https://react-simple-todolist-one.vercel.app/)
 
 ## Features
 
-- `useReducer` for managing the todos state
-- implement `onDrag` gestures, for removing a todo item
+- `useState` and `useEffect` for managing the todos state
+- `lifting state up` for single source of truth state
 - persist data on `localStorage`
 - tailwind css
